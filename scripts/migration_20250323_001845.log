@@ -1,0 +1,19 @@
+[2025-03-23 00:18:45] Iniciando migración con la siguiente configuración:
+[2025-03-23 00:18:45] Host: localhost:54322
+[2025-03-23 00:18:45] Usuario: postgres
+[2025-03-23 00:18:45] Base de datos destino: dbmicroservice (esquema: notification_service)
+[2025-03-23 00:18:45] Verificando conexión a PostgreSQL...
+[2025-03-23 00:18:45] Conexión a PostgreSQL establecida.
+[2025-03-23 00:18:45] Verificando existencia de la base de datos dbmicroservice...
+[2025-03-23 00:18:45] La base de datos dbmicroservice ya existe.
+[2025-03-23 00:18:48] Creando backup en pre_migration_backup_20250323_001845.sql...
+[2025-03-23 00:18:48] Intentando backup con opción --no-check-version para evitar error de versión...
+[2025-03-23 00:18:48] Error al crear backup: /usr/lib/postgresql/14/bin/pg_dump: unrecognized option '--no-check-version'
+Try "pg_dump --help" for more information.
+[2025-03-23 00:18:48] Continuando sin backup debido a incompatibilidad de versiones
+[2025-03-23 00:18:51] Iniciando migración de esquema y tablas...
+[2025-03-23 00:18:51] Migración completada. Detalles en migration_output.log
+[2025-03-23 00:18:51] Verificando migración...
+[2025-03-23 00:18:51] Verificación completada. Detalles en verification_output.log
+[2025-03-23 00:18:51] Estadísticas de migración:
+[2025-03-23 00:18:51] Migración finalizada.

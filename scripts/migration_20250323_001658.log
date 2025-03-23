@@ -1,0 +1,9 @@
+[2025-03-23 00:16:58] Iniciando migración con la siguiente configuración:
+[2025-03-23 00:16:58] Host: localhost:54322
+[2025-03-23 00:16:58] Usuario: postgres
+[2025-03-23 00:16:58] Base de datos destino: dbmicroservice (esquema: notification_service)
+[2025-03-23 00:16:58] Verificando conexión a PostgreSQL...
+[2025-03-23 00:16:58] Conexión a PostgreSQL establecida.
+[2025-03-23 00:16:58] Verificando existencia de la base de datos dbmicroservice...
+[2025-03-23 00:16:58] La base de datos dbmicroservice ya existe.
+[2025-03-23 00:17:03] Creando backup en pre_migration_backup_20250323_001658.sql...

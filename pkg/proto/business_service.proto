@@ -1,0 +1,64 @@
+syntax = "proto3";
+package business;
+
+option go_package = "notification-service/pkg/proto";
+
+service BusinessService {
+  // Validar un usuario
+  rpc ValidateUser(ValidateUserRequest) returns (ValidateUserResponse);
+  
+  // Obtener información de un dispositivo
+  rpc GetDeviceInfo(GetDeviceInfoRequest) returns (GetDeviceInfoResponse);
+  
+  // Obtener dispositivos de un usuario
+  rpc GetUserDevices(GetUserDevicesRequest) returns (GetUserDevicesResponse);
+}
+
+message ValidateUserRequest {
+  string user_id = 1;
+  string auth_token = 2; // Opcional
+}
+
+message ValidateUserResponse {
+  bool is_valid = 1;
+  string user_id = 2;
+  UserInfo user_info = 3;
+  string error_message = 4;
+}
+
+message UserInfo {
+  string user_id = 1;
+  string username = 2;
+  string email = 3;
+  string phone_number = 4;
+  repeated string permissions = 5;
+}
+
+message GetDeviceInfoRequest {
+  string device_id = 1;
+}
+
+message DeviceInfo {
+  string id = 1;
+  string user_id = 2;
+  string device_identifier = 3;
+  string model = 4;
+  bool verified = 5;
+  int64 last_access = 6;
+}
+
+message GetDeviceInfoResponse {
+  DeviceInfo device = 1;
+  bool success = 2;
+  string error_message = 3;
+}
+
+message GetUserDevicesRequest {
+  string user_id = 1;
+}
+
+message GetUserDevicesResponse {
+  repeated DeviceInfo devices = 1;
+  bool success = 2;
+  string error_message = 3;
+}

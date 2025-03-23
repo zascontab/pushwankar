@@ -1,0 +1,20 @@
+{
+  "id": "welcome",
+  "name": "Welcome Notification",
+  "description": "Sent when a user first registers",
+  "title": "Welcome to our service, {{.Name}}!",
+  "body": "Thank you for joining us. We're glad to have you onboard.",
+  "data": {
+    "action": "open_profile"
+  },
+  "locales": {
+    "es": {
+      "title": "¡Bienvenido a nuestro servicio, {{.Name}}!",
+      "body": "Gracias por unirte a nosotros. Estamos encantados de tenerte a bordo."
+    },
+    "fr": {
+      "title": "Bienvenue dans notre service, {{.Name}}!",
+      "body": "Merci de nous avoir rejoint. Nous sommes ravis de vous avoir à bord."
+    }
+  }
+}

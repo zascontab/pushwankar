@@ -1,0 +1,110 @@
+syntax = "proto3";
+package notification;
+
+option go_package = "notification-service/pkg/proto";
+
+service NotificationService {
+  // Enviar notificación a un usuario
+  rpc SendNotification(SendNotificationRequest) returns (SendNotificationResponse);
+  
+  // Verificar token de dispositivo
+  rpc VerifyDeviceToken(VerifyDeviceTokenRequest) returns (VerifyDeviceTokenResponse);
+  
+  // Registrar un dispositivo para recibir notificaciones
+  rpc RegisterDevice(RegisterDeviceRequest) returns (RegisterDeviceResponse);
+  
+  // Vincular un dispositivo a un usuario
+  rpc LinkDeviceToUser(LinkDeviceToUserRequest) returns (LinkDeviceToUserResponse);
+  
+  // Actualizar token de notificación para un dispositivo
+  rpc UpdateDeviceToken(UpdateDeviceTokenRequest) returns (UpdateDeviceTokenResponse);
+  
+  // Obtener el estado de entrega de una notificación
+  rpc GetDeliveryStatus(GetDeliveryStatusRequest) returns (GetDeliveryStatusResponse);
+}
+
+message SendNotificationRequest {
+  string user_id = 1;
+  string title = 2;
+  string message = 3;
+  map<string, string> data = 4;
+  string notification_type = 5; // normal, urgent, etc.
+  string sender_id = 6; // Opcional: ID del remitente
+  int32 priority = 7; // Prioridad: 0-normal, 1-alta
+  int64 expiry = 8; // Tiempo de expiración en segundos desde epoch
+}
+
+message SendNotificationResponse {
+  string notification_id = 1;
+  bool success = 2;
+  string error_message = 3;
+}
+
+message VerifyDeviceTokenRequest {
+  string token = 1;
+}
+
+message VerifyDeviceTokenResponse {
+  bool is_valid = 1;
+  string device_id = 2;
+  string user_id = 3;
+  bool is_temporary = 4;
+  string error_message = 5;
+}
+
+message RegisterDeviceRequest {
+  string device_identifier = 1;
+  string device_model = 2;
+  string user_id = 3; // Opcional
+}
+
+message RegisterDeviceResponse {
+  string device_id = 1;
+  string token = 2;
+  bool success = 3;
+  string error_message = 4;
+}
+
+message LinkDeviceToUserRequest {
+  string device_id = 1;
+  string user_id = 2;
+  string token = 3; // Token temporal para autorizar
+}
+
+message LinkDeviceToUserResponse {
+  string new_token = 1;
+  bool success = 2;
+  string error_message = 3;
+}
+
+message UpdateDeviceTokenRequest {
+  string device_id = 1;
+  string token = 2;
+  string token_type = 3; // websocket, apns, fcm
+}
+
+message UpdateDeviceTokenResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message GetDeliveryStatusRequest {
+  string notification_id = 1;
+}
+
+message DeliveryInfo {
+  string device_id = 1;
+  string status = 2; // pending, sent, delivered, failed
+  int64 sent_at = 3;
+  int64 delivered_at = 4;
+  int64 failed_at = 5;
+  int32 retry_count = 6;
+  string error_message = 7;
+}
+
+message GetDeliveryStatusResponse {
+  string notification_id = 1;
+  repeated DeliveryInfo deliveries = 2;
+  bool success = 3;
+  string error_message = 4;
+}
